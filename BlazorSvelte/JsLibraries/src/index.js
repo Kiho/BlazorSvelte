@@ -12,13 +12,13 @@ export function RenderHello(count) {
 	}
 
 	if (app) {		
-		app.$set({ name: 'Kiho ' + count });
+		app.$set({ name: 'World ' + count });
 	}
 	else {
 		app = new App({
 			target,
 			props: {
-				name: 'Kiho'
+				name: 'World'
 			}
 		});
 	}
