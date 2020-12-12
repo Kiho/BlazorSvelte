@@ -1,5 +1,7 @@
 ﻿@page "/counter"
 @using Microsoft.Extensions.Configuration
+@using System
+@implements IDisposable
 @inject IConfiguration Config
 @inject IJSRuntime Jsr
 
@@ -19,5 +21,12 @@
         currentCount++;
 
         await Jsr.InvokeVoidAsync("SvelteComponents.RenderHello", currentCount);
+    }
+
+    public async void Dispose()
+    {
+        await Jsr.InvokeVoidAsync("SvelteComponents.DestroyHello", currentCount);
+
+        Console.WriteLine("Counter Component Dispose()");
     }
 }

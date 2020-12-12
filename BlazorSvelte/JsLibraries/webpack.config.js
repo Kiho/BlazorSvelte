@@ -40,7 +40,7 @@ module.exports = {
   mode,
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
+			filename: 'bundle.css'
 		})
 	],
 	devtool: prod ? false: 'source-map',

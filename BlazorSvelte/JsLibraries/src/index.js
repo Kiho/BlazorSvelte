@@ -5,6 +5,8 @@ let app;
 export function RenderHello(count) {
 	const target = document.getElementById('svelte-app');
 
+	console.log(target.childNodes, app);
+
 	if (!target.childNodes.length) {
 		app = null;
 	}
@@ -21,4 +23,11 @@ export function RenderHello(count) {
 		});
 	}
 	return app;
+}
+
+export function DestroyHello() {
+	if (app) {
+		app.$destroy();
+		app = null;
+	}
 }

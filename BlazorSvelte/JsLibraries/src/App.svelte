@@ -1,5 +1,11 @@
 <script>
+	import { onDestroy } from 'svelte';
+
 	export let name;
+
+	onDestroy(() => {
+		console.log('Svelte - onDestroy')
+	});
 </script>
 
 <style>
