@@ -1,32 +1,45 @@
 import App from './App.svelte';
 
-let app;
+const reg = {};
 
-export function RenderHello(count) {
-	const target = document.getElementById('svelte-app');
+export function Render(target, ...p) {
+	console.log(target, p);
+	return renderComponent(target, p);
+}
+
+function getKey(target) {
+	const atts = target.attributes;
+	const name = atts.name.value;
+	return { name, key: `${name}-${atts[atts.length - 1].name}` };
+}
+
+function renderComponent(target, p) {
+	const { key } = getKey(target);
+	const count = p[0];
 
 	if (!target.childNodes.length) {
 		console.log('Initialize App', app);
-		app = null;
+		reg[key] = null;
 	}
 
-	if (app) {		
-		app.$set({ name: 'World ' + count });
+	if (reg[key]) {		
+		reg[key].$set({ name: 'World ' + count });
 	}
 	else {
-		app = new App({
+		reg[key] = new App({
 			target,
 			props: {
 				name: 'World'
 			}
 		});
 	}
-	return app;
+	return reg[key];
 }
 
-export function DestroyHello() {
-	if (app) {
-		app.$destroy();
-		app = null;
+export function Destroy(target) {
+	const { key } = getKey(target);
+	if (reg[key]) {
+		reg[key].$destroy();
+	  delete reg[key];
 	}
 }

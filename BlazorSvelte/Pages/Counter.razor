@@ -11,22 +11,21 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-<div id="svelte-app"></div>
+<div @ref="svelteApp" name="App"></div>
 
 @code {
     private int currentCount = 0;
+    private ElementReference svelteApp;
 
     private async void IncrementCount()
     {
         currentCount++;
-
-        await Jsr.InvokeVoidAsync("SvelteComponents.RenderHello", currentCount);
+        await Jsr.InvokeVoidAsync("SvelteComponents.Render", svelteApp, currentCount);
     }
 
     public async void Dispose()
     {
-        await Jsr.InvokeVoidAsync("SvelteComponents.DestroyHello", currentCount);
-
+        await Jsr.InvokeVoidAsync("SvelteComponents.Destroy", svelteApp);
         Console.WriteLine("Counter Component Dispose()");
     }
 }
