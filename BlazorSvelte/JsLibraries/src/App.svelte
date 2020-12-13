@@ -4,7 +4,7 @@
 	export let name;
 
 	onDestroy(() => {
-		console.log('Svelte - onDestroy')
+		console.log('Svelte - onDestroy');
 	});
 </script>
 

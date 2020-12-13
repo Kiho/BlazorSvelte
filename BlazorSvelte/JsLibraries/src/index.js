@@ -5,9 +5,8 @@ let app;
 export function RenderHello(count) {
 	const target = document.getElementById('svelte-app');
 
-	console.log(target.childNodes, app);
-
 	if (!target.childNodes.length) {
+		console.log('Initialize App', app);
 		app = null;
 	}
 
